@@ -1,63 +1,117 @@
-# EducationBERT — Leveraging LIME for Transparent and Accurate Visual Question Answering in Education
+# CogniSense: Early Dementia Detection System
 
-## Overview
+CogniSense is a research-focused multimodal machine learning system designed to study early indicators of dementia by analyzing speech patterns, linguistic features, and cognitive task performance. The project combines Natural Language Processing and Reinforcement Learning to explore scalable and non-invasive approaches to cognitive health assessment.
 
-This project introduces **EducationBERT**, a Visual Question Answering (VQA) system focused on educational contexts, using explainable AI techniques to enhance transparency and reliability. By integrating Local Interpretable Model-Agnostic Explanations (LIME) with Vision Transformers (ViTs), the model improves accuracy, interpretability, and user trust.
+This work was developed as part of an academic research project and has been accepted at an IEEE conference.
 
-The system is designed to respond to multiple-choice questions based on image data across various educational subjects, including natural and social sciences and language arts.
+---
 
-## Key Features
+## 🧠 Motivation
 
-- **Explainability with LIME**: LIME is used to create human-understandable explanations of predictions, which enhances model trust and usability in sensitive domains.
-- **Vision Transformer-based Architecture**: The model uses ViTs for image processing, making it capable of handling complex visual scenarios and understanding long-range dependencies.
-- **Multimodal Attention Mechanism**: Combines both visual and textual information effectively to provide accurate answers based on context.
+Early-stage dementia is difficult to diagnose because symptoms are subtle and often mistaken for normal aging. Traditional clinical assessments can be costly, time-consuming, and inaccessible in low-resource settings.
 
-## Dataset
+This project explores whether **speech characteristics and simple cognitive tasks**, analyzed through machine learning, can provide early signals of cognitive decline in a scalable and non-invasive way.
 
-The dataset contains images and multiple-choice questions focused on educational subjects:
+---
 
-- **Images**: Around 14,457 images are grouped into folders by question topic.
-- **Questions**: Spanning various subjects like natural sciences, social studies, and grammar, with 3–5 answer options each.
-- **Annotations**: Each image is paired with relevant questions and annotated with correct answers for supervised training.
+## 🔍 System Overview
 
-You can download the dataset from [ScienceQA dataset](https://scienceqa.github.io/#dataset).
+The system integrates three primary data modalities:
 
-## Methodology
+### 1. Speech & Acoustic Features
+- MFCCs
+- Pitch and intonation
+- Pause count
+- Speech rate
 
-1. **Image Processing**: Images are preprocessed and converted into patches for the Vision Transformer.
-2. **Vision Transformer Encoder**: Uses self-attention mechanisms to understand image features globally.
-3. **Text Encoder**: Processes questions into high-dimensional vectors, aligning with image representations.
-4. **Attention Fusion**: Merges image and text data, enabling the model to focus on relevant visual regions based on question context.
-5. **Explanation and Feedback**: LIME generates explanations post-prediction, providing feedback for model refinement.
+Speech recordings are transcribed using OpenAI’s Whisper ASR model and analyzed for linguistic and acoustic patterns associated with cognitive impairment.
 
-## Performance Metrics
+### 2. Text & Semantic Features
+- Transcripts generated from speech
+- BERT-based embeddings (768-dimensional) to capture semantic richness, coherence, and syntactic structure
 
-The model is evaluated using:
+### 3. Cognitive & Behavioral Features
+- Reaction time
+- Task accuracy
+- Completion time
+- Attention span
+- Error rate
+- Processing speed
 
-- Accuracy  
-- Macro F1 Score  
-- Wu-Palmer Similarity (WUPS)
+These features capture executive function and cognitive consistency during structured tasks.
 
-With LIME integrated, performance improved across all metrics:
+---
 
-- **Accuracy:** Increased from **62.5%** to **68.2%**  
-- **Macro F1 Score:** Increased from **60.3%** to **66.7%**  
-- **WUPS@0.9:** Increased from **63.8%** to **69.0%**
+## ⚙️ Methodology
 
-## Results
-<img width="1470" height="620" alt="Screenshot 2025-12-06 at 11 43 50 AM" src="https://github.com/user-attachments/assets/4368fdc4-2701-4c4d-9a9f-52bfae06bd36" />
+- **Preprocessing**
+  - Speech-to-text using Whisper
+  - Acoustic feature extraction from raw audio
+  - Text cleaning and BERT embedding generation
+  - Normalization and imputation for behavioral data
 
+- **Classification Model**
+  - XGBoost classifier trained on combined multimodal feature vectors
+  - Binary classification: Healthy vs Dementia
 
-## Requirements
+- **Adaptive Cognitive Task Recommendation**
+  - Reinforcement Learning using a Deep Q-Network (DQN)
+  - Dynamically adjusts cognitive task difficulty based on user performance
+  - Reward function encourages engagement and appropriate challenge level
 
-- Python 3.7+
-- PyTorch
-- Hugging Face Transformers
-- OpenCV
-- Scikit-Learn
-- LIME
+---
 
-Install the necessary dependencies with:
+## 📊 Results
 
-```bash
-pip install -r requirements.txt
+- Achieved **84% overall classification accuracy** on a public multimodal dataset
+- Strong performance in identifying healthy participants
+- Identified limitations in recall for dementia cases, highlighting the importance of class balance and further model refinement
+- Reinforcement learning agent demonstrated reasonable task adaptation behavior based on cognitive state
+
+This analysis provided valuable insight into both the strengths and limitations of multimodal cognitive assessment systems.
+
+---
+
+## 🧪 Key Learnings
+
+- Multimodal feature fusion provides richer cognitive signals than speech alone
+- Speech rate, pauses, and reaction time showed strong correlation with cognitive decline
+- Model evaluation and error analysis are critical, especially in healthcare-related ML
+- Reinforcement learning can be effectively used for personalization, even in prototype systems
+
+---
+
+## 📁 Repository Structure
+
+- `MODEL TRAINING.ipynb` – Feature extraction, preprocessing, model training
+- `MODEL TESTING.ipynb` – Evaluation, metrics, visualizations
+- `Dementia Research Paper.pdf` – Full research paper with methodology and results
+
+---
+
+## ⚠️ Disclaimer
+
+This project is a **research prototype** and is **not intended for clinical diagnosis or medical use**. Results are based on public datasets and are meant for academic exploration and learning.
+
+---
+
+## 📄 Publication
+
+**CogniSense: Early Dementia Detection System**  
+Accepted at *IEEE ACDSA 2025*
+
+---
+
+## 🚀 Future Work
+
+- Improve class imbalance handling
+- Expand dataset diversity
+- Incorporate longitudinal data
+- Integrate additional modalities such as wearables or physiological signals
+
+---
+
+**Jai Vasi**  
+MS Data Science, Stony Brook University  
+📧 jai.n.vasi1108@gmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/jaivasi1108
